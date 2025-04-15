@@ -3,6 +3,7 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
 
   const correctAnswers = {
     q1: "HTML"
+    // можно добавить больше: q2: "CSS", q3: "JavaScript"
   };
 
   let score = 0;
@@ -13,6 +14,11 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
       score++;
     }
   }
-  const result = document.getElementById("result");
-  result.textContent = `Правильных ответов: ${score}`;
+
+  // Сохраняем результат в localStorage
+  localStorage.setItem("score", score);
+
+  // Переход на result.html
+  window.location.href = "result.html";
 });
+
