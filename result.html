@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Результаты</title>
+</head>
+<body>
+  <h1>Результаты теста</h1>
+  <p id="final-score"></p>
+
+  <script>
+    const score = localStorage.getItem("score");
+
+    document.getElementById("final-score").textContent = `Вы набрали ${score} баллов!`;
+  </script>
+</body>
+</html>
