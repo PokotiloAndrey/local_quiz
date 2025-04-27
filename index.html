@@ -7,33 +7,90 @@
 </head>
 <body>
   <h1>Тест: Основы веб-разработки</h1>
-    <div id="progress-bar-container">
-    <div id="progress-bar"></div>
+
+  <div id="progress-bar-container" style="background: #ddd; width: 100%; height: 20px; margin-bottom: 20px;">
+    <div id="progress-bar" style="background: #4CAF50; height: 100%; width: 0%;"></div>
   </div>
+  <p id="question-number">Вопрос 1 из 3</p>
 
   <form id="quiz-form">
-    <div>
+    <div class="question">
       <p>1. Какой язык используют для создания веб-страниц?</p>
       <label><input type="radio" name="q1" value="HTML"> HTML</label><br>
       <label><input type="radio" name="q1" value="Python"> Python</label>
     </div>
-  <div>
-    <p>2. Какой язык используется для стилизации веб-страниц?</p>
-    <label><input type="radio" name="q2" value="CSS"> CSS</label><br>
-    <label><input type="radio" name="q2" value="Java"> Java</label>
-  </div>
 
-  <div>
-    <p>3. Что делает тег `<a>`?</p>
-    <label><input type="radio" name="q3" value="Ссылка"> Ссылка</label><br>
-    <label><input type="radio" name="q3" value="Абзац"> Абзац</label>
-  </div>
+    <div class="question" style="display: none;">
+      <p>2. Какой язык используется для стилизации веб-страниц?</p>
+      <label><input type="radio" name="q2" value="CSS"> CSS</label><br>
+      <label><input type="radio" name="q2" value="Java"> Java</label>
+    </div>
 
-    <button type="submit">Проверить</button>
+    <div class="question" style="display: none;">
+      <p>3. Что делает тег `<a>`?</p>
+      <label><input type="radio" name="q3" value="Ссылка"> Ссылка</label><br>
+      <label><input type="radio" name="q3" value="Абзац"> Абзац</label>
+    </div>
+
+    <button type="submit" id="next-button">Далее</button>
   </form>
 
   <div id="result"></div>
 
-  <script src="script.js" defer></script>
+  <script>
+    let currentQuestion = 0;
+
+    function showQuestion(index) {
+      const questions = document.querySelectorAll(".question");
+      questions.forEach((q, i) => {
+        q.style.display = i === index ? "block" : "none";
+      });
+
+      document.getElementById("question-number").textContent = `Вопрос ${index + 1} из ${questions.length}`;
+
+      document.getElementById("progress-bar").style.width = `${((index) / questions.length) * 100}%`;
+
+      const nextButton = document.getElementById("next-button");
+      if (index === questions.length - 1) {
+        nextButton.textContent = "Проверить";
+      } else {
+        nextButton.textContent = "Далее";
+      }
+    }
+
+    document.getElementById("quiz-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const questions = document.querySelectorAll(".question");
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      } else {
+        const correctAnswers = {
+          q1: "HTML",
+          q2: "CSS",
+          q3: "Ссылка"
+        };
+
+        let score = 0;
+        let total = Object.keys(correctAnswers).length;
+
+        for (let question in correctAnswers) {
+          const selected = document.querySelector(`input[name="${question}"]:checked`);
+          if (selected && selected.value === correctAnswers[question]) {
+            score++;
+          }
+        }
+
+        localStorage.setItem("score", score);
+        localStorage.setItem("total", total);
+
+        window.location.href = "result.html";
+      }
+    });
+
+    showQuestion(currentQuestion);
+  </script>
 </body>
 </html>
