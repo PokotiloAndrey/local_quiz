@@ -2,16 +2,32 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Результаты</title>
+  <title>Результат теста</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Результаты теста</h1>
-  <p id="final-score"></p>
+  <h1>Результаты квиза</h1>
+
+  <div id="result-container" style="text-align: center; margin-top: 30px;">
+    <p id="score"></p>
+    <button onclick="restartQuiz()" style="margin-top: 20px;">Пройти ещё раз</button>
+  </div>
 
   <script>
     const score = localStorage.getItem("score");
+    const total = localStorage.getItem("total");
 
-    document.getElementById("final-score").textContent = `Вы набрали ${score} баллов!`;
+    const scoreElement = document.getElementById("score");
+    if (score !== null && total !== null) {
+      scoreElement.textContent = `Вы правильно ответили на ${score} из ${total} вопросов!`;
+    } else {
+      scoreElement.textContent = "Результат не найден. Пожалуйста, пройдите тест.";
+    }
+
+    function restartQuiz() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
   </script>
 </body>
 </html>
