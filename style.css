@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f0f6ff;
@@ -6,10 +7,13 @@ body {
   color: #003366;
 }
 
+
 h1 {
   text-align: center;
   color: #002244;
+  margin-bottom: 20px;
 }
+
 
 #progress-bar-container {
   width: 100%;
@@ -27,30 +31,46 @@ h1 {
   transition: width 0.3s ease;
 }
 
+/* Форма теста */
 #quiz-form {
   max-width: 600px;
   margin: 0 auto;
   background: #ffffff;
-  padding: 30px;
+  padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 85, 204, 0.2);
 }
 
-#quiz-form div {
-  margin-bottom: 20px;
+
+.question {
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #f8faff;
+  border-radius: 8px;
 }
 
-#quiz-form p {
+.question p {
   font-weight: bold;
+  margin-bottom: 10px;
 }
+
 
 label {
   display: block;
   margin: 8px 0;
+  padding: 10px 15px;
+  background-color: #f0f6ff;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-button[type="submit"], #start-button {
+label:hover {
+  background-color: #e0ecff;
+}
+
+/* Кнопки */
+button[type="submit"] {
   background-color: #0055cc;
   color: white;
   border: none;
@@ -59,20 +79,30 @@ button[type="submit"], #start-button {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  display: inline-block;
-  margin-top: 20px;
+  display: block;
+  margin: 20px auto 0;
+  width: 100%;
+  max-width: 200px;
 }
 
-button[type="submit"]:hover, #start-button:hover {
+button[type="submit"]:hover {
   background-color: #0044aa;
   transform: scale(1.05);
+}
+
+
+#welcome-title {
+  text-align: center;
+  color: #002244;
+  margin-bottom: 30px;
+  font-size: 36px;
 }
 
 .start-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh; 
+  height: 70vh;
   text-align: center;
 }
 
@@ -92,17 +122,6 @@ button[type="submit"]:hover, #start-button:hover {
   transform: scale(1.05);
 }
 
-#welcome-title {
-  text-align: center;
-  color: #002244;
-  margin-bottom: 30px;
-  font-size: 36px;
-}
-
-.start-button-container {
-  text-align: center;
-  margin-top: 50px;
-}
 
 #result {
   max-width: 600px;
@@ -123,22 +142,11 @@ button[type="submit"]:hover, #start-button:hover {
 #result p {
   font-size: 20px;
   color: #0055cc;
+  margin-bottom: 20px;
 }
 
-#quiz-form {
-  padding: 0;
-  margin: 0 auto; 
-}
 
-#quiz-form div {
-  margin-bottom: 0; 
-}
-
-.question {
-  padding: 0; 
-}
-
-label {
-  margin: 0; 
-  display: block; 
+#question-number {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
