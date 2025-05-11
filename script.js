@@ -4,10 +4,6 @@ let questions = [];
 let totalQuestions = 0;
 const quizForm = document.getElementById("quiz-form");
 const nextButton = document.createElement('button');
-nextButton.type = 'submit';
-nextButton.id = 'next-button';
-nextButton.textContent = 'Далее';
-quizForm.appendChild(nextButton);
 
 // Инициализация квиза
 function initQuiz() {
@@ -17,6 +13,13 @@ function initQuiz() {
   document.getElementById('quiz-title').textContent = `Тест: ${quizData.title}`;
   questions = quizData.questions;
   totalQuestions = questions.length;
+  
+  // Настройка кнопки "Далее"
+  nextButton.type = 'button'; // Изменено с 'submit' на 'button'
+  nextButton.id = 'next-button';
+  nextButton.textContent = 'Далее';
+  nextButton.addEventListener('click', handleNextQuestion);
+  quizForm.appendChild(nextButton);
   
   renderQuestions();
   showQuestion(0);
@@ -30,14 +33,19 @@ function renderQuestions() {
     const questionDiv = document.createElement('div');
     questionDiv.className = 'question';
     questionDiv.style.display = 'none';
+    
+    const optionsHTML = question.options.map(opt => `
+      <label>
+        <input type="radio" name="${question.name}" value="${opt}" required>
+        <span>${opt}</span>
+      </label>
+    `).join('');
+    
     questionDiv.innerHTML = `
       <p>${question.text}</p>
-      ${question.options.map(opt => `
-        <label>
-          <input type="radio" name="${question.name}" value="${opt}"> ${opt}
-        </label>
-      `).join('')}
+      <div class="options">${optionsHTML}</div>
     `;
+    
     quizForm.insertBefore(questionDiv, nextButton);
   });
 }
@@ -48,9 +56,10 @@ function showQuestion(index) {
     q.style.display = i === index ? 'block' : 'none';
   });
 
-  document.getElementById("progress-bar").style.width = `${((index + 1) / totalQuestions) * 100}%`;
+  const progress = ((index + 1) / totalQuestions) * 100;
+  document.getElementById("progress-bar").style.width = `${progress}%`;
   document.getElementById("question-number").textContent = `Вопрос ${index + 1} из ${totalQuestions}`;
-  nextButton.textContent = index === totalQuestions - 1 ? 'Проверить' : 'Далее';
+  nextButton.textContent = index === totalQuestions - 1 ? 'Завершить тест' : 'Далее';
 }
 
 // Подсчет результатов
@@ -69,10 +78,8 @@ function calculateResult() {
   window.location.href = "result.html";
 }
 
-// Обработчик формы
-quizForm.addEventListener("submit", function(event) {
-  event.preventDefault();
-  
+// Обработчик кнопки "Далее"
+function handleNextQuestion() {
   const currentQ = questions[currentQuestion];
   const selected = document.querySelector(`input[name="${currentQ.name}"]:checked`);
   
@@ -87,7 +94,7 @@ quizForm.addEventListener("submit", function(event) {
   } else {
     calculateResult();
   }
-});
+}
 
 // Запускаем квиз при загрузке
 document.addEventListener('DOMContentLoaded', initQuiz);
