@@ -6,12 +6,16 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Результаты квиза</h1>
+  <div class="result-page">
+    <h1>Результаты квиза</h1>
 
-  <div id="result-container">
-    <p id="score"></p>
-    <button onclick="restartQuiz()">Пройти ещё раз</button>
-    <button onclick="goToThemes()">Выбрать другую тему</button>
+    <div id="result-container">
+      <p id="score"></p>
+      <div class="buttons">
+        <button onclick="restartQuiz()">Пройти ещё раз</button>
+        <button onclick="goToThemes()">Выбрать другую тему</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -21,7 +25,8 @@
       const scoreElement = document.getElementById("score");
 
       if (score !== null && total !== null) {
-        scoreElement.textContent = `Вы правильно ответили на ${score} из ${total} вопросов!`;
+        const percentage = Math.round((score / total) * 100);
+        scoreElement.textContent = `Вы правильно ответили на ${score} из ${total} вопросов! (${percentage}%)`;
       } else {
         scoreElement.textContent = "Результат не найден. Пожалуйста, пройдите тест.";
       }
