@@ -8,17 +8,37 @@
 <body class="start-page">
   <h1 id="welcome-title">Выберите тему квиза</h1>
   
-  <div class="themes-container">
-    <button class="theme-btn" onclick="startQuiz('web')">Основы веб-разработки</button>
-    <button class="theme-btn" onclick="startQuiz('html')">HTML</button>
-    <button class="theme-btn" onclick="startQuiz('css')">CSS</button>
+  <div class="themes-container" id="themes-container">
+    <!-- Темы будут подгружаться динамически -->
   </div>
 
+  <script src="themes.js"></script>
   <script>
+    function getRandomThemes(count) {
+      const allThemes = Object.keys(questionsData);
+      const shuffled = allThemes.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    }
+
+    function renderThemeButtons() {
+      const container = document.getElementById('themes-container');
+      const randomThemes = getRandomThemes(4);
+      
+      randomThemes.forEach(theme => {
+        const btn = document.createElement('button');
+        btn.className = 'theme-btn';
+        btn.textContent = questionsData[theme].title;
+        btn.onclick = () => startQuiz(theme);
+        container.appendChild(btn);
+      });
+    }
+
     function startQuiz(theme) {
       localStorage.setItem('quizTheme', theme);
       window.location.href = "quiz.html";
     }
+
+    document.addEventListener('DOMContentLoaded', renderThemeButtons);
   </script>
 </body>
 </html>
