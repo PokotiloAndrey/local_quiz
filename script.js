@@ -15,11 +15,10 @@ function initQuiz() {
   totalQuestions = questions.length;
   
   // Настройка кнопки "Далее"
-  nextButton.type = 'button'; // Изменено с 'submit' на 'button'
+  nextButton.type = 'button';
   nextButton.id = 'next-button';
   nextButton.textContent = 'Далее';
   nextButton.addEventListener('click', handleNextQuestion);
-  quizForm.appendChild(nextButton);
   
   renderQuestions();
   showQuestion(0);
@@ -46,8 +45,11 @@ function renderQuestions() {
       <div class="options">${optionsHTML}</div>
     `;
     
-    quizForm.insertBefore(questionDiv, nextButton);
+    quizForm.appendChild(questionDiv);
   });
+  
+  // Добавляем кнопку после всех вопросов
+  quizForm.appendChild(nextButton);
 }
 
 // Показываем текущий вопрос
