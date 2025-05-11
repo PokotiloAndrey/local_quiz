@@ -2,20 +2,22 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Добро пожаловать!</title>
+  <title>Выбор темы квиза</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="welcome-title">Добро пожаловать в квиз!</h1>
+  <h1 id="welcome-title">Выберите тему квиза</h1>
   
-  <div class="start-button-container">
-    <button id="start-button" onclick="startQuiz()">Начать квиз</button>
+  <div class="themes-container">
+    <button class="theme-btn" onclick="startQuiz('web')">Основы веб-разработки</button>
+    <button class="theme-btn" onclick="startQuiz('html')">HTML</button>
+    <button class="theme-btn" onclick="startQuiz('css')">CSS</button>
   </div>
 
   <script>
-    function startQuiz() {
-      localStorage.clear();
-      window.location.href = "index.html";
+    function startQuiz(theme) {
+      localStorage.setItem('quizTheme', theme);
+      window.location.href = "quiz.html";
     }
   </script>
 </body>
