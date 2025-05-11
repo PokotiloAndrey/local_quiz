@@ -1,55 +1,86 @@
 let currentQuestion = 0;
 let score = 0;
-const questions = document.querySelectorAll(".question");
-const totalQuestions = questions.length;
+let questions = [];
+let totalQuestions = 0;
 const quizForm = document.getElementById("quiz-form");
-const nextButton = document.getElementById("next-button");
+const nextButton = document.createElement('button');
+nextButton.type = 'submit';
+nextButton.id = 'next-button';
+nextButton.textContent = 'Далее';
+quizForm.appendChild(nextButton);
+
+// Инициализация квиза
+function initQuiz() {
+  const theme = localStorage.getItem('quizTheme') || 'web';
+  const quizData = questionsData[theme];
+  
+  document.getElementById('quiz-title').textContent = `Тест: ${quizData.title}`;
+  questions = quizData.questions;
+  totalQuestions = questions.length;
+  
+  renderQuestions();
+  showQuestion(0);
+}
+
+// Рендер всех вопросов
+function renderQuestions() {
+  quizForm.innerHTML = '';
+  
+  questions.forEach((question, index) => {
+    const questionDiv = document.createElement('div');
+    questionDiv.className = 'question';
+    questionDiv.style.display = 'none';
+    questionDiv.innerHTML = `
+      <p>${question.text}</p>
+      ${question.options.map(opt => `
+        <label>
+          <input type="radio" name="${question.name}" value="${opt}"> ${opt}
+        </label>
+      `).join('')}
+    `;
+    quizForm.insertBefore(questionDiv, nextButton);
+  });
+}
 
 // Показываем текущий вопрос
 function showQuestion(index) {
-  questions.forEach((q, i) => {
-    q.style.display = i === index ? "block" : "none";
+  document.querySelectorAll('.question').forEach((q, i) => {
+    q.style.display = i === index ? 'block' : 'none';
   });
 
-  // Обновляем прогресс-бар и номер вопроса
   document.getElementById("progress-bar").style.width = `${((index + 1) / totalQuestions) * 100}%`;
   document.getElementById("question-number").textContent = `Вопрос ${index + 1} из ${totalQuestions}`;
-
-  // Меняем текст кнопки на последнем вопросе
-  nextButton.textContent = index === totalQuestions - 1 ? "Проверить" : "Далее";
+  nextButton.textContent = index === totalQuestions - 1 ? 'Проверить' : 'Далее';
 }
 
-// Функция подсчета результатов
+// Подсчет результатов
 function calculateResult() {
-  const correctAnswers = { q1: "HTML", q2: "CSS", q3: "Ссылка" };
-
-  for (let question in correctAnswers) {
-    const selected = document.querySelector(`input[name="${question}"]:checked`);
-    if (selected && selected.value === correctAnswers[question]) {
+  score = 0;
+  
+  questions.forEach(question => {
+    const selected = document.querySelector(`input[name="${question.name}"]:checked`);
+    if (selected && selected.value === question.correct) {
       score++;
     }
-  }
+  });
 
-  // Сохраняем результат и переходим на страницу результатов
   localStorage.setItem("score", score);
   localStorage.setItem("total", totalQuestions);
   window.location.href = "result.html";
 }
 
-// Обработчик отправки формы
+// Обработчик формы
 quizForm.addEventListener("submit", function(event) {
   event.preventDefault();
-
-  // Проверяем выбран ли ответ на ТЕКУЩЕМ вопросе
-  const currentQuestionName = `q${currentQuestion + 1}`;
-  const selected = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
-
+  
+  const currentQ = questions[currentQuestion];
+  const selected = document.querySelector(`input[name="${currentQ.name}"]:checked`);
+  
   if (!selected) {
     alert("Пожалуйста, выберите ответ!");
-    return; // Останавливаем функцию
+    return;
   }
 
-  // Логика перехода/проверки
   if (currentQuestion < totalQuestions - 1) {
     currentQuestion++;
     showQuestion(currentQuestion);
@@ -58,5 +89,5 @@ quizForm.addEventListener("submit", function(event) {
   }
 });
 
-// Инициализация первого вопроса
-showQuestion(currentQuestion);
+// Запускаем квиз при загрузке
+document.addEventListener('DOMContentLoaded', initQuiz);
