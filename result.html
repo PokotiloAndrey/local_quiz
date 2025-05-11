@@ -8,21 +8,23 @@
 <body>
   <h1>Результаты квиза</h1>
 
-  <div id="result-container" style="text-align: center; margin-top: 30px;">
+  <div id="result-container">
     <p id="score"></p>
-    <button onclick="restartQuiz()" style="margin-top: 20px;">Пройти ещё раз</button>
+    <button onclick="restartQuiz()">Пройти ещё раз</button>
   </div>
 
   <script>
-    const score = localStorage.getItem("score");
-    const total = localStorage.getItem("total");
+    document.addEventListener('DOMContentLoaded', () => {
+      const score = localStorage.getItem("score");
+      const total = localStorage.getItem("total");
+      const scoreElement = document.getElementById("score");
 
-    const scoreElement = document.getElementById("score");
-    if (score !== null && total !== null) {
-      scoreElement.textContent = `Вы правильно ответили на ${score} из ${total} вопросов!`;
-    } else {
-      scoreElement.textContent = "Результат не найден. Пожалуйста, пройдите тест.";
-    }
+      if (score !== null && total !== null) {
+        scoreElement.textContent = `Вы правильно ответили на ${score} из ${total} вопросов!`;
+      } else {
+        scoreElement.textContent = "Результат не найден. Пожалуйста, пройдите тест.";
+      }
+    });
 
     function restartQuiz() {
       localStorage.clear();
