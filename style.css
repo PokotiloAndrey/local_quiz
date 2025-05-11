@@ -1,125 +1,31 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f6ff;
-  margin: 0;
-  padding: 20px;
-  color: #003366;
+/* Добавить в конец файла */
+
+.themes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
 }
 
-h1 {
-  text-align: center;
-  color: #002244;
-  margin-bottom: 20px;
-}
-
-#progress-bar-container {
-  width: 100%;
-  background-color: #d0e2ff;
-  border-radius: 10px;
-  margin: 20px 0;
-  height: 20px;
-  overflow: hidden;
-}
-
-#progress-bar {
-  height: 100%;
-  width: 0;
-  background-color: #007bff;
-  transition: width 0.3s ease;
-}
-
-#quiz-form {
-  max-width: 600px;
-  margin: 0 auto;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 85, 204, 0.2);
-}
-
-.question {
-  margin-bottom: 15px;
-  padding: 15px;
-  background-color: #f8faff;
-  border-radius: 8px;
-}
-
-.question p {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-label {
-  display: block;
-  margin: 8px 0;
-  padding: 10px 15px;
-  background-color: #f0f6ff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-label:hover {
-  background-color: #e0ecff;
-}
-
-button, button[type="submit"] {
+.theme-btn {
   background-color: #0055cc;
   color: white;
   border: none;
-  padding: 14px 28px;
+  padding: 15px 30px;
   font-size: 18px;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: block;
-  margin: 20px auto 0;
-  width: 100%;
-  max-width: 200px;
+  transition: all 0.3s ease;
+  width: 250px;
+  text-align: center;
 }
 
-button:hover, button[type="submit"]:hover {
+.theme-btn:hover {
   background-color: #0044aa;
   transform: scale(1.05);
 }
 
-#welcome-title {
-  text-align: center;
-  color: #002244;
-  margin-bottom: 30px;
-  font-size: 36px;
-}
-
-.start-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70vh;
-  text-align: center;
-}
-
-#start-button {
-  padding: 15px 30px;
-  font-size: 22px;
-}
-
-#result-container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 85, 204, 0.2);
-  text-align: center;
-}
-
-#question-number {
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-#score {
-  font-size: 20px;
-  margin-bottom: 20px;
+#result-container button {
+  margin: 10px auto;
 }
