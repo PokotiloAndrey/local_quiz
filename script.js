@@ -1,4 +1,5 @@
 let currentQuestion = 0;
+let score = 0;
 const questions = document.querySelectorAll(".question");
 const totalQuestions = questions.length;
 const quizForm = document.getElementById("quiz-form");
@@ -21,7 +22,6 @@ function showQuestion(index) {
 // Функция подсчета результатов
 function calculateResult() {
   const correctAnswers = { q1: "HTML", q2: "CSS", q3: "Ссылка" };
-  let score = 0;
 
   for (let question in correctAnswers) {
     const selected = document.querySelector(`input[name="${question}"]:checked`);
