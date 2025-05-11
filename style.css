@@ -124,7 +124,7 @@ h1 {
 }
 
 #next-button:hover {
-  background-color: #27ae60;
+  background-color: #3498db;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
