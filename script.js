@@ -1,6 +1,8 @@
 let currentQuestion = 0;
 const questions = document.querySelectorAll(".question");
 const totalQuestions = questions.length;
+const quizForm = document.getElementById("quiz-form");
+const nextButton = document.getElementById("next-button");
 
 // Показываем текущий вопрос
 function showQuestion(index) {
@@ -13,31 +15,8 @@ function showQuestion(index) {
   document.getElementById("question-number").textContent = `Вопрос ${index + 1} из ${totalQuestions}`;
 
   // Меняем текст кнопки на последнем вопросе
-  const nextButton = document.getElementById("next-button");
   nextButton.textContent = index === totalQuestions - 1 ? "Проверить" : "Далее";
 }
-
-// Обработчик отправки формы
-document.getElementById("quiz-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  // Проверяем, выбран ли ответ
-  const currentQuestionName = `q${currentQuestion + 1}`;
-  const selectedAnswer = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
-
-  if (!selectedAnswer) {
-    alert("Пожалуйста, выберите ответ!");
-    return; // Прерываем функцию, если ответ не выбран
-  }
-
-  // Переключаем вопрос или завершаем тест
-  if (currentQuestion < totalQuestions - 1) {
-    currentQuestion++;
-    showQuestion(currentQuestion);
-  } else {
-    calculateResult();
-  }
-});
 
 // Функция подсчета результатов
 function calculateResult() {
@@ -56,6 +35,28 @@ function calculateResult() {
   localStorage.setItem("total", totalQuestions);
   window.location.href = "result.html";
 }
+
+// Обработчик отправки формы
+quizForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  // Проверяем выбран ли ответ на ТЕКУЩЕМ вопросе
+  const currentQuestionName = `q${currentQuestion + 1}`;
+  const selected = document.querySelector(`input[name="${currentQuestionName}"]:checked`);
+
+  if (!selected) {
+    alert("Пожалуйста, выберите ответ!");
+    return; // Останавливаем функцию
+  }
+
+  // Логика перехода/проверки
+  if (currentQuestion < totalQuestions - 1) {
+    currentQuestion++;
+    showQuestion(currentQuestion);
+  } else {
+    calculateResult();
+  }
+});
 
 // Инициализация первого вопроса
 showQuestion(currentQuestion);
