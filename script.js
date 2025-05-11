@@ -5,7 +5,7 @@ let totalQuestions = 0;
 const quizForm = document.getElementById("quiz-form");
 const nextButton = document.createElement('button');
 
-// Инициализация квиза
+
 function initQuiz() {
   const theme = localStorage.getItem('quizTheme') || 'web';
   const quizData = questionsData[theme];
@@ -14,7 +14,7 @@ function initQuiz() {
   questions = quizData.questions;
   totalQuestions = questions.length;
   
-  // Настройка кнопки "Далее"
+
   nextButton.type = 'button';
   nextButton.id = 'next-button';
   nextButton.textContent = 'Далее';
@@ -24,7 +24,7 @@ function initQuiz() {
   showQuestion(0);
 }
 
-// Рендер всех вопросов
+
 function renderQuestions() {
   quizForm.innerHTML = '';
   
@@ -48,11 +48,11 @@ function renderQuestions() {
     quizForm.appendChild(questionDiv);
   });
   
-  // Добавляем кнопку после всех вопросов
+
   quizForm.appendChild(nextButton);
 }
 
-// Показываем текущий вопрос
+
 function showQuestion(index) {
   document.querySelectorAll('.question').forEach((q, i) => {
     q.style.display = i === index ? 'block' : 'none';
@@ -64,7 +64,7 @@ function showQuestion(index) {
   nextButton.textContent = index === totalQuestions - 1 ? 'Завершить тест' : 'Далее';
 }
 
-// Подсчет результатов
+
 function calculateResult() {
   score = 0;
   
@@ -80,7 +80,7 @@ function calculateResult() {
   window.location.href = "result.html";
 }
 
-// Обработчик кнопки "Далее"
+
 function handleNextQuestion() {
   const currentQ = questions[currentQuestion];
   const selected = document.querySelector(`input[name="${currentQ.name}"]:checked`);
@@ -98,5 +98,4 @@ function handleNextQuestion() {
   }
 }
 
-// Запускаем квиз при загрузке
 document.addEventListener('DOMContentLoaded', initQuiz);
