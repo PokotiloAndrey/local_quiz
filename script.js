@@ -1,14 +1,32 @@
+let currentQuestion = 0;
+const questions = document.querySelectorAll(".question");
+const totalQuestions = questions.length;
+
+function showQuestion(index) {
+  questions.forEach((q, i) => {
+    q.style.display = i === index ? "block" : "none";
+  });
+
+  document.getElementById("question-number").textContent = `Вопрос ${index + 1} из ${totalQuestions}`;
+  document.getElementById("progress-bar").style.width = `${((index + 1) / totalQuestions) * 100}%`;
+
+  const nextButton = document.getElementById("next-button");
+  nextButton.textContent = index === totalQuestions - 1 ? "Проверить" : "Далее";
+}
+
 document.getElementById("quiz-form").addEventListener("submit", function(event) {
   event.preventDefault();
+  
+  // Проверка выбранного ответа
+  const currentQuestionName = `q${currentQuestion + 1}`;
+  if (!document.querySelector(`input[name="${currentQuestionName}"]:checked`)) {
+    alert("Пожалуйста, выберите ответ!");
+    return;
+  }
 
-  const questions = document.querySelectorAll("#quiz-form > div");
-
-  if (currentQuestion < questions.length - 1) {
+  if (currentQuestion < totalQuestions - 1) {
     currentQuestion++;
     showQuestion(currentQuestion);
-
-    document.getElementById("progress-bar").style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
-    document.getElementById("question-number").textContent = `Вопрос ${currentQuestion + 1} из ${questions.length}`;
   } else {
     const correctAnswers = {
       q1: "HTML",
@@ -17,8 +35,6 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
     };
 
     let score = 0;
-    let total = Object.keys(correctAnswers).length;
-
     for (let question in correctAnswers) {
       const selected = document.querySelector(`input[name="${question}"]:checked`);
       if (selected && selected.value === correctAnswers[question]) {
@@ -27,9 +43,10 @@ document.getElementById("quiz-form").addEventListener("submit", function(event) 
     }
 
     localStorage.setItem("score", score);
-    localStorage.setItem("total", total); 
-
+    localStorage.setItem("total", totalQuestions);
     window.location.href = "result.html";
   }
 });
 
+// Инициализация первого вопроса
+showQuestion(currentQuestion);
