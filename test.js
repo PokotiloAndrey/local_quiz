@@ -1,8 +1,9 @@
+
 /**
  * @jest-environment jsdom
  */
-
-const Quiz = require("./script.js");
+import { describe,expect, jest } from '@jest/globals';
+import Quiz from './script.js';
 
 delete window.location;
 window.location = { href: "" };

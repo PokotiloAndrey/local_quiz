@@ -2,13 +2,14 @@
   "name": "local_quiz",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "script.js",
   "homepage": "https://PokotiloAndrey.github.io/local_quiz",
   "scripts": {
     "predeploy": "",
     "deploy": "gh-pages -d .",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.cjs"
-    "test:watch": "jest --watchAll",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.cjs",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -17,6 +18,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
     "@babel/preset-env": "^7.27.2",
     "@types/jest": "^29.5.14",
     "eslint": "^8.57.1",

@@ -16,15 +16,15 @@ const questionsData = {
         name: "q2",
       },
       {
-        text: "3. Что делает тег `<a>`?",
+        text: "3. Что делает тег `a`?",
         options: ["Ссылка", "Абзац", "Картинка", "Таблица"],
         correct: "Ссылка",
         name: "q3",
       },
       {
         text: "4. Какой тег определяет основное содержимое документа?",
-        options: ["<main>", "<header>", "<nav>", "<aside>"],
-        correct: "<main>",
+        options: ["main", "header", "nav", "aside"],
+        correct: "main",
         name: "q4",
       },
     ],
@@ -34,8 +34,8 @@ const questionsData = {
     questions: [
       {
         text: "1. Какой тег используется для заголовка первого уровня?",
-        options: ["<h1>", "<header>", "<head>", "<heading>"],
-        correct: "<h1>",
+        options: ["h1", "header", "head", "heading"],
+        correct: "h1",
         name: "q1",
       },
       {
@@ -46,14 +46,14 @@ const questionsData = {
       },
       {
         text: "3. Какой тег создает ненумерованный список?",
-        options: ["<ul>", "<ol>", "<li>", "<list>"],
-        correct: "<ul>",
+        options: ["ul", "ol", "li", "list"],
+        correct: "ul",
         name: "q3",
       },
       {
         text: "4. Какой тег используется для вставки видео?",
-        options: ["<video>", "<media>", "<movie>", "<embed>"],
-        correct: "<video>",
+        options: ["video", "media", "movie", "embed"],
+        correct: "video",
         name: "q4",
       },
     ],
@@ -121,8 +121,8 @@ const questionsData = {
     questions: [
       {
         text: "1. Как создать новую ветку в Git?",
-        options: ["git branch <name>", "git new branch <name>", "git create branch <name>", "git checkout -b <name>"],
-        correct: "git branch <name>",
+        options: ["git branch name", "git new branch name", "git create branch name", "git checkout -b name"],
+        correct: "git branch name",
         name: "q1",
       },
       {
@@ -150,7 +150,7 @@ const questionsData = {
     questions: [
       {
         text: "1. Как создать компонент в React?",
-        options: ["function MyComponent() {}", "class MyComponent extends React.Component {}", "const MyComponent = () => {}", "Все варианты верны"],
+        options: ["function MyComponent() {}", "class MyComponent extends React.Component {}", "const MyComponent = () = {}", "Все варианты верны"],
         correct: "Все варианты верны",
         name: "q1",
       },
