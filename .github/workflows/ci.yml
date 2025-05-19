@@ -13,13 +13,15 @@ jobs:
           node-version: '18'
           cache: 'npm'
           
-      - name: Fix and install dependencies
+      - name: Install ESLint globally
         run: |
-          rm -rf node_modules package-lock.json
-          npm install
-          npm install @eslint/js eslint-config-airbnb-base eslint-plugin-import globals --save-dev
+          npm install -g eslint @eslint/js
+          npm install eslint-config-airbnb-base eslint-plugin-import globals --save-dev
           
-      - name: Run ESLint
+      - name: Run ESLint fix
+        run: npx eslint . --config eslint.config.js --fix
+          
+      - name: Run ESLint check
         run: npx eslint . --config eslint.config.js --max-warnings=0
 
   test:
