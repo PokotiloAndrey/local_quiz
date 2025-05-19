@@ -16,10 +16,10 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          npm install eslint@latest --save-dev
+          npm install @eslint/js eslint-config-airbnb-base --save-dev
           
       - name: Run ESLint
-        run: npx eslint .
+        run: npx eslint . --config eslint.config.js
 
   test:
     runs-on: ubuntu-latest
