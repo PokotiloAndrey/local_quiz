@@ -79,7 +79,11 @@ const Quiz = (() => {
   }
 
   function initQuiz() {
-    const theme = localStorage.getItem("quizTheme") || "web";
+    const theme = localStorage.getItem("quizTheme");
+    if (!theme) {
+    window.location.href = "index.html";
+    return;
+    }
     const quizData = questionsData[theme];
 
     document.getElementById("quiz-title").textContent = `Тест: ${quizData.title}`;
