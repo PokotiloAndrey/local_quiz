@@ -1,9 +1,8 @@
-
 /**
  * @jest-environment jsdom
  */
 import { describe,expect, jest } from '@jest/globals';
-import { Quiz } from './script.js';
+import Quiz from './script.js';
 
 delete window.location;
 window.location = { href: "" };
