@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Выбор темы квиза</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="start-page">
+  <h1 id="welcome-title">Выберите тему квиза</h1>
+  <div class="themes-container" id="themes-container"></div>
+
+  <script type="module">
+    import { questionsData } from './themes.js';
+    
+    function getRandomThemes(count) {
+    const allThemes = Object.keys(questionsData);
+    const shuffled = [...allThemes].sort(() => Math.random() - 0.5); 
+    return shuffled.slice(0, Math.min(count, allThemes.length));
+  }
+    function renderThemeButtons() {
+      const container = document.getElementById('themes-container');
+      const testThemes = getRandomThemes(4);
+      
+      testThemes.forEach(theme => {
+        const btn = document.createElement('button');
+        btn.className = 'theme-btn';
+        btn.textContent = questionsData[theme].title;
+        btn.onclick = () => {
+          localStorage.setItem('quizTheme', theme);
+          window.location.href = "quiz.html";
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderThemeButtons);
+  </script>
+</body>
+</html>
