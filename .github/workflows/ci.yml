@@ -63,15 +63,11 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Build project
-      run: npm run build  # Или ваша команда сборки
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: ./dist  # Папка с собранными файлами
+        publish_dir: ./  
         force_orphan: true
-        user_name: 'GitHub Actions'
-        user_email: 'actions@github.com'
