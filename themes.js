@@ -1,4 +1,4 @@
-var questionsData = {
+export const questionsData = {
   web: {
     title: "Основы веб-разработки",
     questions: [
