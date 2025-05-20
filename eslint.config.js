@@ -22,8 +22,7 @@ export default [
       
       'no-unused-vars': ['error', { varsIgnorePattern: 'questionsData|score' }],
       'no-redeclare': 'off',
-
-      'no-console': 'warn',
+      'no-console': 'off',
       'no-plusplus': 'off',
       'no-alert': 'off',
       'no-param-reassign': ['error', { props: false }],
