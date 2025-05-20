@@ -12,9 +12,8 @@
  
   </div>
 
-  <script src="themes.js" type="module"></script>
+  <script src="themes.js" type="module">
   import { questionsData } from './themes.js';
-  <script>
     function getRandomThemes(count) {
       const allThemes = Object.keys(questionsData);
       const shuffled = allThemes.sort(() => 0.5 - Math.random());
