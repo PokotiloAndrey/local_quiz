@@ -1,4 +1,4 @@
-/* global questionsData */
+import { questionsData } from './themes.js';
 const Quiz = (() => {
   let currentQuestion = 0;
   const score = 0;
