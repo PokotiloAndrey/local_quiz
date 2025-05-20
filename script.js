@@ -113,3 +113,6 @@ const Quiz = (() => {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { Quiz };
 }
+if (typeof window !== 'undefined') {
+  window.Quiz = Quiz;
+}
