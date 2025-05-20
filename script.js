@@ -110,9 +110,7 @@ const Quiz = (() => {
     setTotalQuestions: (count) => { totalQuestions = count; },
   };
 })();
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { Quiz };
-}
 if (typeof window !== 'undefined') {
   window.Quiz = Quiz;
 }
+export default Quiz;
