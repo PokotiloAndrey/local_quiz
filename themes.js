@@ -290,3 +290,4 @@ const questionsData = {
     ],
   },
 };
+export { questionsData };
