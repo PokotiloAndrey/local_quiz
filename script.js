@@ -65,7 +65,6 @@ const Quiz = (() => {
     const selected = document.querySelector(`input[name="${currentQuestionData.name}"]:checked`);
 
     if (!selected) {
-    // eslint-disable-next-line no-alert
       alert("Пожалуйста, выберите ответ!");
       return;
     }
@@ -80,11 +79,15 @@ const Quiz = (() => {
 
   function initQuiz() {
     const theme = localStorage.getItem("quizTheme");
+    console.log("Выбранная тема из localStorage:", theme); 
+    console.log("Все доступные темы:", Object.keys(questionsData));
     if (!theme) {
+    console.error("Тема не выбрана или не найдена:", theme);
     window.location.href = "index.html";
     return;
     }
     const quizData = questionsData[theme];
+    console.log("Данные выбранной темы:", quizData); 
 
     document.getElementById("quiz-title").textContent = `Тест: ${quizData.title}`;
     questions = quizData.questions;
