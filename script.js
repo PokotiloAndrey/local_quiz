@@ -110,4 +110,6 @@ const Quiz = (() => {
     setTotalQuestions: (count) => { totalQuestions = count; },
   };
 })();
-export { Quiz as default };
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { Quiz };
+}
