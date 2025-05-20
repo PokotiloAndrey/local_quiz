@@ -44,7 +44,7 @@ jobs:
           
       - name: Run tests
         run: |
-          NODE_OPTIONS=--experimental-vm-modules npx jest --config=./jest.config.cjs
+          NODE_OPTIONS=--experimental-vm-modules npx jest --config=./jest.config.js
 
   deploy:
     runs-on: ubuntu-latest
