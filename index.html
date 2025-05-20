@@ -3,15 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Выбор темы квиза</title>
-  <style>
-    .theme-btn {
-      display: block;
-      padding: 10px;
-      margin: 10px;
-      background: #4CAF50;
-      color: white;
-    }
-  </style>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="start-page">
@@ -21,9 +12,14 @@
   <script type="module">
     import { questionsData } from './themes.js';
     
+    function getRandomThemes(count) {
+    const allThemes = Object.keys(questionsData);
+    const shuffled = [...allThemes].sort(() => Math.random() - 0.5); 
+    return shuffled.slice(0, Math.min(count, allThemes.length));
+  }
     function renderThemeButtons() {
       const container = document.getElementById('themes-container');
-      const testThemes = ['web', 'html', 'css', 'js']; // Фиксированные темы для теста
+      const testThemes = getRandomThemes(4);
       
       testThemes.forEach(theme => {
         const btn = document.createElement('button');
